@@ -9,3 +9,16 @@
 #message.active {
   display:block;
 }
+#delete-popup {
+  position: absolute;
+  top:0;
+  text-align:center;
+  width: 400px;
+  height: 400px;
+  border:1px solid gray;
+  background-color: white;
+  display: none;
+}
+#delete-popup.active {
+  display: block;
+}

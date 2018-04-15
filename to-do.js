@@ -38,6 +38,20 @@ function deleteTodo(indexDel){
   clearValue();
 }
 
+function showDeleteConfirmPopup(indexToDelete) {
+  var popup = document.querySelector('#delete-popup');
+  popup.classList.add('active');
+  var deleteBtn = popup.querySelector('#delete-yes-btn');
+  deleteBtn.onclick = function () {
+    deleteTodo(indexToDelete);
+    popup.classList.remove('active');
+    showMessage(indexToDelete);
+  };
+  var cancelBtn = popup.querySelector('#delete-no-btn');
+  cancelBtn.onclick = function () {
+    popup.classList.remove('active');
+  }
+}
 
 function showMessage(todoText) {
   var message = document.querySelector('#message');
@@ -78,8 +92,7 @@ todoList.addEventListener('click', function (event) {
   if(event.target.className === 'delete-btn') {
     var listItemElem = event.target.parentNode;
     var indexToDelete = getSuffixFrom(listItemElem.className);
-    deleteTodo(indexToDelete);
-    showMessage(indexToDelete);
+    showDeleteConfirmPopup(indexToDelete)
   }
 });
 
