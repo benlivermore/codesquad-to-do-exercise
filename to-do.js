@@ -16,7 +16,8 @@ function listTodos() {
   list.innerHTML = '';
   todos.forEach(function (item, key) {
     var listElem = document.createElement('li');
-    listElem.textContent = item;
+    listElem.className = 'item-' + key;
+    listElem.innerHTML = item + '<button class="delete-btn">delete</button>';
     list.appendChild(listElem);
   });
   console.log(todos.length + ' todos listed');
@@ -30,27 +31,39 @@ function addTodo(){
   clearValue();
 }
 
-function deleteTodo(){
-  var itemNumToDelete = getValue();
-  var indexDel = itemNumToDelete - 1;
+function deleteTodo(indexDel){
   todos.splice(indexDel, 1);
-  console.log(itemNumToDelete + " deleted");
+  console.log(indexDel + " deleted");
   listTodos();
   clearValue();
+}
+
+function getSuffixFrom(str) {
+  return str.split('-')[1];
 }
 
 var addButton = document.querySelector('#add-btn');
 var deleteButton = document.querySelector('#delete-btn');
 var todoInput = document.querySelector('#to-do');
+var todoList = document.querySelector('#to-do-list');
 
 addButton.onclick = addTodo;
-deleteButton.addEventListener('click', deleteTodo);
 
 todoInput.addEventListener('keypress', function(event){
   if (event.keyCode === 13) {
     addTodo();
   }
 });
+
+
+
+todoList.addEventListener('click', function (event) {
+  if(event.target.className === 'delete-btn') {
+    var indexToDelete = getSuffixFrom(event.target.parentNode.className);
+    deleteTodo(indexToDelete);
+  }
+});
+
 
 listTodos();
 
