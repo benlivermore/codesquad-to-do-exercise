@@ -39,4 +39,11 @@ function deleteTodo(){
   clearValue();
 }
 
+var addButton = document.querySelector('#add-btn');
+var deleteButton = document.querySelector('#delete-btn');
+
+addButton.onclick = addTodo;
+deleteButton.addEventListener('click', deleteTodo);
+
 listTodos();
+
