@@ -38,6 +38,19 @@ function deleteTodo(indexDel){
   clearValue();
 }
 
+
+function showMessage(todoText) {
+  var message = document.querySelector('#message');
+  var messageText = document.querySelector('#message div');
+  messageText.textContent = 'You just deleted ' + todoText;
+  message.classList.add('active');
+}
+
+function hideMessage() {
+  var message = document.querySelector('#message');
+  message.classList.remove('active');
+}
+
 function getSuffixFrom(str) {
   return str.split('-')[1];
 }
@@ -46,6 +59,10 @@ var addButton = document.querySelector('#add-btn');
 var deleteButton = document.querySelector('#delete-btn');
 var todoInput = document.querySelector('#to-do');
 var todoList = document.querySelector('#to-do-list');
+var todoList = document.querySelector('#to-do-list');
+var messageBtn = document.querySelector('#hide-message-btn');
+
+messageBtn.addEventListener('click', hideMessage);
 
 addButton.onclick = addTodo;
 
@@ -59,8 +76,10 @@ todoInput.addEventListener('keypress', function(event){
 
 todoList.addEventListener('click', function (event) {
   if(event.target.className === 'delete-btn') {
-    var indexToDelete = getSuffixFrom(event.target.parentNode.className);
+    var listItemElem = event.target.parentNode;
+    var indexToDelete = getSuffixFrom(listItemElem.className);
     deleteTodo(indexToDelete);
+    showMessage(indexToDelete);
   }
 });
 
