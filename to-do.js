@@ -41,9 +41,16 @@ function deleteTodo(){
 
 var addButton = document.querySelector('#add-btn');
 var deleteButton = document.querySelector('#delete-btn');
+var todoInput = document.querySelector('#to-do');
 
 addButton.onclick = addTodo;
 deleteButton.addEventListener('click', deleteTodo);
+
+todoInput.addEventListener('keypress', function(event){
+  if (event.keyCode === 13) {
+    addTodo();
+  }
+});
 
 listTodos();
 
